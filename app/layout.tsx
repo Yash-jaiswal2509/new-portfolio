@@ -5,7 +5,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/navbar/navbar";
+import { Spotlight } from "@/components/ui/spotlight";
 
 const satoshi = localFont({
   display: "swap",
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={cn("antialiased relative min-h-screen p-4 bg-black", satoshi.variable)}
+        className={cn("antialiased min-h-screen bg-black font-satoshi", satoshi.variable)}
       >
         <ShootingStars
           minDelay={1000}
@@ -42,7 +43,11 @@ export default function RootLayout({
           starDensity={0.0002}
           allStarsTwinkle={true}
         />
-        <Navbar/>
+        <Navbar />
+        <Spotlight
+          className=""
+          fill="white"
+        />
         {children}
       </body>
     </html>

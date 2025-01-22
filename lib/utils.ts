@@ -2,7 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import GITHUB from '../public/social/github.png';
 import LINKEDIN from '../public/social/linkedin.png';
-import X from '../public/social/x.png';
+import TWITTER from '../public/social/twitter.png';
 import MEDIUM from '../public/social/medium.png';
 import { SocialMediaProps, type NavbarItemsProps } from './types';
 
@@ -49,13 +49,13 @@ export const socialMedia: SocialMediaProps[] = [
     icon: LINKEDIN,
   },
   {
-    name: 'X',
+    name: 'Twitter',
     href: 'https://x.com/YashJaiswa50855/',
-    icon: X,
+    icon: TWITTER,
   },
   {
     name: 'Medium',
     href: 'https://medium.com/@yashjaiswal2509',
-    icon: MEDIUM
+    icon: MEDIUM,
   },
 ];

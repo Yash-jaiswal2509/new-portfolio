@@ -70,3 +70,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .home-button {
+    @apply text-lg px-10 py-6 cursor-pointer tracking-wider;
+  }
+}
