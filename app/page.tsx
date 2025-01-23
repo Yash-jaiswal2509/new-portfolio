@@ -19,9 +19,15 @@ const Home = () => {
       <div className="mt-32 flex items-center flex-col">
         <p className="text-white">A 2026 aspirant currently looking for jobs or internship</p>
         <TypewriterEffectSmooth words={words} />
+
         <div className="inline-flex space-x-4 mt-4">
           <Button className="home-button" variant={"default"}>Resume <DownloadIcon /></Button>
           <Link href={"/projects"}><Button className="home-button" variant={"custom"}>Projects <ShoppingBag /></Button></Link>
+        </div>
+
+        <div className="mt-32">
+          <p className="text-white text-xl">Some recent achievements</p>
+          {/* Add recent achivements */}
         </div>
       </div>
     </div>

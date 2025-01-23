@@ -35,6 +35,10 @@ export const navbarItems: NavbarItemsProps[] = [
     name: 'Contact',
     href: '/contact',
   },
+  {
+    name: 'Develop',
+    href: '/develop',
+  },
 ];
 
 export const socialMedia: SocialMediaProps[] = [
