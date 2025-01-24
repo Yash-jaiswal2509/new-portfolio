@@ -13,7 +13,7 @@ const SocialItems = ({ socialItems }: SocalProps) => {
     const [tootTip, setToolTip] = useState<string | null>(null);
 
     return (
-        <div className="flex items-center gap-8 relative z-30">
+        <div className="flex items-center gap-8 relative">
             {
                 socialItems.map((item, index) => {
                     return (

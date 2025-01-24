@@ -2,7 +2,7 @@ export const publicRoutes: string[] = [
   '/',
   '/about',
   '/blog',
-  '/competitve-programming',
+  '/competitive-programming',
   '/contact',
   '/projects',
 ];

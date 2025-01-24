@@ -10,3 +10,12 @@ export const LoginSchema = zod.object({
   }),
   code: zod.string().optional(),
 });
+
+export const RegisterSchema = zod.object({
+  email: zod.string().email({
+    message: 'Email is required',
+  }),
+  password: zod.string().min(8, {
+    message: 'Minimum password length is 8 characters',
+  }),
+});
