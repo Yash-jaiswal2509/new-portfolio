@@ -1,14 +1,17 @@
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import BackButton from "./back-button";
 import Header from "./header";
 import OAuth from "./OAuth";
 
 type CardWrapperProps = {
     children: React.ReactNode,
     headerLabel: string,
-    showSocials: boolean
+    showSocials: boolean,
+    backButtonHref: string,
+    backButtonLabel: string
 }
 
-const CardWrapper = ({ children, headerLabel, showSocials }: CardWrapperProps) => {
+const CardWrapper = ({ children, headerLabel, showSocials, backButtonHref, backButtonLabel }: CardWrapperProps) => {
 
     return (
         <Card className="w-[400px] relative">
@@ -23,6 +26,9 @@ const CardWrapper = ({ children, headerLabel, showSocials }: CardWrapperProps) =
                     <OAuth />
                 </CardFooter>
             )}
+            <CardFooter>
+                <BackButton href={backButtonHref} label={backButtonLabel} />
+            </CardFooter>
         </Card>
     )
 }
