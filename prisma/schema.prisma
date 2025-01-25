@@ -13,12 +13,14 @@ enum UserRole {
 }
 
 model User {
-  id       String    @id @default(cuid())
-  name     String
-  email    String?   @unique
-  password String?
-  role     UserRole  @default(USER)
-  Account  Account[]
+  id            String    @id @default(cuid())
+  name          String
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  role          UserRole  @default(USER)
+  accounts      Account[]
 
   @@map("users")
 }
@@ -26,19 +28,21 @@ model User {
 model Account {
   id                String  @id @default(cuid())
   userId            String
+  type              String
   provider          String
   providerAccountId String
-  refreshToken      String? @db.Text
-  accessToken       String? @db.Text
-  expiresAt         Int?
-  tokenType         String?
+  access_token      String? @db.Text
+  refresh_token     String? @db.Text
+  expires_at        Int?
+  token_type        String?
   scope             String?
-  idToken           String? @db.Text
-  sessionState      String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Project {
@@ -49,4 +53,6 @@ model Project {
   githubUrl   String
   projectUrl  String
   createdAt   DateTime @default(now())
+
+  @@map("projects")
 }

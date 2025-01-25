@@ -51,12 +51,13 @@ const LoginForm = () => {
     }
 
     return (
-        <CardWrapper headerLabel="Welcome Back" showSocials={true} backButtonHref="/auth/register" backButtonLabel = "Don't have an account? Create Now">
+        <CardWrapper headerLabel="Welcome Back" showSocials={true} backButtonHref="/auth/register" backButtonLabel="Don't have an account? Create Now">
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-4">
                     <Form {...form}>
                         <FormField
                             control={form.control}
+                            disabled={isPending}
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
@@ -69,6 +70,7 @@ const LoginForm = () => {
                         />
                         <FormField
                             control={form.control}
+                            disabled={isPending}
                             name="password"
                             render={() => (
                                 <FormItem>
@@ -80,9 +82,16 @@ const LoginForm = () => {
                             )} />
                     </Form>
                 </div>
-                <FormSuccess />
-                <FormError />
-                <Button className="w-full" variant={"custom"} type="submit">Submit</Button>
+                <FormSuccess message={success} />
+                <FormError message={error || urlError} />
+                <Button
+                    className="w-full"
+                    variant={"custom"}
+                    type="submit"
+                    disabled={isPending}
+                >
+                    Sign In
+                </Button>
             </form>
         </CardWrapper>
     )

@@ -42,10 +42,8 @@ export default auth((req) => {
       new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl),
     );
   }
-
   return;
 });
-
 
 export const config = {
   matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],

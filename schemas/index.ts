@@ -12,6 +12,9 @@ export const LoginSchema = zod.object({
 });
 
 export const RegisterSchema = zod.object({
+  name: zod.string().min(3, {
+    message: 'Minimum name length is 3 characters',
+  }),
   email: zod.string().email({
     message: 'Email is required',
   }),

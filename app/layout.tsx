@@ -7,6 +7,7 @@ import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import Navbar from "@/components/navbar/navbar";
 import { Spotlight } from "@/components/ui/spotlight";
+import { SessionProvider } from "next-auth/react";
 
 const satoshi = localFont({
   display: "swap",
@@ -26,30 +27,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <body
-        className={cn("antialiased min-h-screen bg-black font-satoshi", satoshi.variable)}
-      >
-        <ShootingStars
-          minDelay={1000}
-          maxDelay={2000}
-          minSpeed={5}
-          maxSpeed={10}
-          starColor="#325EAA"
-          trailColor="#E83D99"
-          starHeight={2}
-          starWidth={20} />
-        <StarsBackground
-          starDensity={0.0002}
-          allStarsTwinkle={true}
-        />
-        <Navbar />
-        <Spotlight
-          className=""
-          fill="white"
-        />
-        {children}
-      </body>
-    </html>
+    <SessionProvider>
+      <html lang="en" suppressHydrationWarning={true}>
+        <body
+          className={cn("antialiased min-h-screen bg-black font-satoshi", satoshi.variable)}
+        >
+          <ShootingStars
+            minDelay={1000}
+            maxDelay={2000}
+            minSpeed={5}
+            maxSpeed={10}
+            starColor="#325EAA"
+            trailColor="#E83D99"
+            starHeight={2}
+            starWidth={20} />
+          <StarsBackground
+            starDensity={0.0002}
+            allStarsTwinkle={true}
+          />
+          <Navbar />
+          <Spotlight
+            className=""
+            fill="white"
+          />
+          {children}
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
