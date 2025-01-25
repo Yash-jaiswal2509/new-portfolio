@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 const UserDetails = () => {
     const user = useCurrentUser();
-
+    
     return (
         <div>
             {

@@ -20,6 +20,7 @@ model User {
   password      String?
   image         String?
   role          UserRole  @default(USER)
+  resume        String?
   accounts      Account[]
 
   @@map("users")
@@ -47,6 +48,7 @@ model Account {
 
 model Project {
   id          String   @id @default(cuid())
+  userId      String
   name        String
   imageUrl    String
   description String

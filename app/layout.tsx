@@ -1,13 +1,19 @@
-import type { Metadata } from "next";
-import { siteConfig } from "../config/site-config";
-import localFont from "next/font/local"
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import type { Metadata } from "next";
+import localFont from "next/font/local"
+
+import { siteConfig } from "../config/site-config";
+
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
+
 import Navbar from "@/components/navbar/navbar";
+import { Toaster } from "sonner";
+
 import { Spotlight } from "@/components/ui/spotlight";
 import { SessionProvider } from "next-auth/react";
+
 
 const satoshi = localFont({
   display: "swap",
@@ -51,6 +57,7 @@ export default function RootLayout({
             fill="white"
           />
           {children}
+          <Toaster />
         </body>
       </html>
     </SessionProvider>

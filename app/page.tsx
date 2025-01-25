@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Spotlight } from "@/components/ui/spotlight";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import { DownloadIcon, ShoppingBag } from "lucide-react";
-import Link from "next/link";
+import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import DownloadResume from "@/components/home/download-resume";
 
 const Home = () => {
   const words = [
@@ -21,7 +22,7 @@ const Home = () => {
         <TypewriterEffectSmooth words={words} />
 
         <div className="inline-flex space-x-4 mt-4">
-          <Button className="home-button" variant={"default"}>Resume <DownloadIcon /></Button>
+          <DownloadResume />
           <Link href={"/projects"}><Button className="home-button" variant={"custom"}>Projects <ShoppingBag /></Button></Link>
         </div>
 
