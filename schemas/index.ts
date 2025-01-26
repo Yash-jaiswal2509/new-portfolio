@@ -1,5 +1,4 @@
 import * as zod from 'zod';
-import { UserRole } from '@prisma/client';
 
 export const LoginSchema = zod.object({
   email: zod.string().email({
@@ -20,5 +19,23 @@ export const RegisterSchema = zod.object({
   }),
   password: zod.string().min(8, {
     message: 'Minimum password length is 8 characters',
+  }),
+});
+
+export const AddProjectSchema = zod.object({
+  name: zod.string().min(3, {
+    message: 'Minimum name length is 3 characters',
+  }),
+  description: zod.string().min(10, {
+    message: 'Minimum description length is 10 characters',
+  }),
+  projectLink: zod.string().url({
+    message: 'Please enter a valid project link',
+  }),
+  projectGithub: zod.string().url({
+    message: 'Please enter a valid github link',
+  }),
+  projectImage: zod.string().url({
+    message: 'Please enter a valid image link',
   }),
 });

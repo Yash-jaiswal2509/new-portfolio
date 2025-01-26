@@ -5,6 +5,7 @@ export const publicRoutes: string[] = [
   '/competitive-programming',
   '/contact',
   '/projects',
+  '/api/admin/download-resume',
 ];
 
 export const authRoutes: string[] = ['/auth/login', '/auth/register'];

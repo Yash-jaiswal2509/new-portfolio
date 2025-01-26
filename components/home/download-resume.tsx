@@ -52,7 +52,9 @@ const DownloadResume = () => {
             document.body.removeChild(link);
         } catch (error) {
             console.error("Error downloading resume:", error);
-            toast.error("An error occurred while downloading resume");
+            toast.error("An error occurred while downloading resume", {
+                className: 'text-red-500 bg-transparent'
+            });
         } finally {
             setIsLoading(false);
         }

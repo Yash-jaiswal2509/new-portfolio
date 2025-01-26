@@ -1,17 +1,21 @@
 import { addResume } from '@/actions/add-resume';
+import { currentRole } from '@/lib/auth';
+import { UserRole } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
+  const role = await currentRole();
+
+  if (role === UserRole.USER) {
+    return NextResponse.json({
+      status: 403,
+      message: 'Sorry!!, Only admin can upload resume',
+    });
+  }
+
   try {
     const data = await req.json();
     const { user, link } = data;
-
-    if (user?.role !== 'ADMIN') {
-      return NextResponse.json({
-        status: 403,
-        message: 'Sorry!, only admin can upload resume',
-      });
-    }
 
     if (!link) {
       return NextResponse.json({
@@ -22,7 +26,7 @@ export async function POST(req: NextRequest) {
 
     const fileId = link.match(/\/d\/([^/]+)/)?.[1];
     console.log(fileId);
-    
+
     if (!fileId) {
       return NextResponse.json({
         status: 400,

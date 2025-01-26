@@ -58,7 +58,9 @@ const AddResume = () => {
             }
         } catch (error) {
             console.log(error);
-            toast.error('An error occurred while uploading resume');
+            toast.error('An error occurred while uploading resume',{
+                className: 'text-red-500 bg-transparent'
+            });
         } finally {
             formRef.current?.reset();
             setLoading(false);
@@ -73,10 +75,8 @@ const AddResume = () => {
                 <CardDescription>Paste your resume google drive link</CardDescription>
             </CardHeader>
             <CardContent>
-                <form className="" onSubmit={onSubmit} ref={formRef}>
-                    <Input disabled={loading} type="text" placeholder="Google Drive Link" name="link" />
-                    <Button disabled={loading} type="submit" className="bg-blue-500 mt-2 w-full">Upload</Button>
-                </form>
+                <Input name="link" disabled={loading} type="text" placeholder="Google Drive Link" />
+                <Button disabled={loading} type="submit" className="bg-blue-500 mt-2 w-full">Upload</Button>
             </CardContent>
         </Card>
     )
