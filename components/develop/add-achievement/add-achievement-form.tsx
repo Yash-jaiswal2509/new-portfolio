@@ -1,10 +1,12 @@
+
+
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddProjectSchema } from "@/schemas";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
+import { AddAchievementSchema } from "@/schemas";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
 import { z } from "zod";
 import axios from "axios";
@@ -14,31 +16,29 @@ import { Loader } from "lucide-react";
 
 const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
-type AddProjectFormProps = {
+type AddAchievementProps = {
     show: boolean;
     setShow: (value: boolean) => void;
 };
 
-const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
+const AddAchievementForm = ({ show, setShow }: AddAchievementProps) => {
     const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [imageLoader, setImageLoader] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const form = useForm({
-        resolver: zodResolver(AddProjectSchema),
+        resolver: zodResolver(AddAchievementSchema),
         defaultValues: {
-            name: "",
+            title: "",
             description: "",
-            projectLink: "",
-            projectGithub: "",
-            projectImage: ""
+            achievementImageUrl: "",
         }
     });
 
     const uploadImage = async (formData: FormData) => {
         try {
-            const response = await axios.post(`${FrontendUrl}/api/admin/add-resume/files`, formData, {
+            const response = await axios.post(`${FrontendUrl}/api/admin/files`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -82,7 +82,7 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
             console.log("Image Link", image);
             if (image) {
                 setImageUrl(image);
-                form.setValue('projectImage', image);
+                form.setValue('achievementImageUrl', image);
             }
         } catch (error) {
             console.error(error);
@@ -95,28 +95,28 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
     };
 
 
-    const handleSubmit = async (values: z.infer<typeof AddProjectSchema>) => {
+    const handleSubmit = async (values: z.infer<typeof AddAchievementSchema>) => {
         setIsLoading(true);
         try {
-            const response = await axios.post(`${FrontendUrl}/api/admin/add-project`, values);
+            const response = await axios.post(`${FrontendUrl}/api/admin/add-achievement`, values);
 
             if (response.data.status !== 200) {
-                console.error('Failed to submit project', response.data.message);
-                toast.error('Failed to submit project', {
+                console.error('Failed to submit achievement', response.data.message);
+                toast.error('Failed to submit achievement', {
                     className: 'text-red-500 bg-transparent'
                 });
                 return;
             }
 
-            toast.success('Project submitted successfully', {
+            toast.success('Achievement submitted successfully', {
                 className: 'text-emerald-500 bg-transparent'
             });
 
             form.reset();
             setShow(false);
         } catch (error) {
-            console.error('Failed to submit project', error);
-            toast.error('Failed to submit project', {
+            console.error('Failed to submit achievement', error);
+            toast.error('Failed to submit achievement', {
                 className: 'text-red-500 bg-transparent'
             });
         } finally {
@@ -134,7 +134,7 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                 <div className="fixed h-full w-full inset-0 flex justify-center items-center backdrop-blur z-50">
                     <div className="p-6 rounded-lg shadow-lg text-white w-[400px] border backdrop-blur-3xl bg-black/80 space-y-5">
                         <div className="flex justify-between items-center">
-                            <h1 className="text-3xl font-bold">Add Project</h1>
+                            <h1 className="text-3xl font-bold">Add Achievement</h1>
                             <Button
                                 variant="destructive"
                                 onClick={() => setShow(false)}
@@ -150,12 +150,12 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                             <Form {...form}>
                                 <FormField
                                     control={form.control}
-                                    name="name"
+                                    name="title"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Project Name</FormLabel>
+                                            <FormLabel>Achievement</FormLabel>
                                             <FormControl>
-                                                <Input {...field} type="text" placeholder="Enter your project name" />
+                                                <Input {...field} type="text" placeholder="Enter your title" />
                                             </FormControl>
                                         </FormItem>
                                     )}
@@ -165,37 +165,13 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                                     name="description"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel>Project Description</FormLabel>
+                                            <FormLabel>Achievement Description</FormLabel>
                                             <FormControl>
                                                 <Textarea
                                                     {...field}
-                                                    placeholder="Enter your project description"
+                                                    placeholder="Enter your achievement description"
                                                     className="resize-none"
                                                 />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="projectLink"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Project Link</FormLabel>
-                                            <FormControl>
-                                                <Input {...field} type="text" placeholder="Enter your project link" />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="projectGithub"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Project Github Link</FormLabel>
-                                            <FormControl>
-                                                <Input {...field} type="text" placeholder="Enter your project github link" />
                                             </FormControl>
                                         </FormItem>
                                     )}
@@ -203,10 +179,10 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
 
                                 <FormField
                                     control={form.control}
-                                    name="projectImage"
+                                    name="achievementImageUrl"
                                     render={({ field: { value, ...fieldProps } }) => (
                                         <FormItem>
-                                            <FormLabel>Project Image</FormLabel>
+                                            <FormLabel>Achivement Image</FormLabel>
                                             <FormControl>
                                                 <div className="flex items-center space-x-2">
                                                     <Input
@@ -230,7 +206,7 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                                                     {imageUrl && (
                                                         <Image loader={({ src }) => {
                                                             return src;
-                                                        }} src={imageUrl} alt="Poject Image" height={100} width={100} className="rounded-sm" />
+                                                        }} src={imageUrl} alt="Achievement Image" height={100} width={100} className="rounded-sm" />
                                                     )}
                                                 </div>
                                             </FormControl>
@@ -239,7 +215,7 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                                 />
                             </Form>
                             <Button type="submit" className="bg-blue-500 w-full">
-                                {isLoading ? <>Adding... <Loader className="animate-spin" /></> : "Add Project"}
+                                {isLoading ? <>Adding... <Loader className="animate-spin" /></> : "Add Achievement"}
                             </Button>
                         </form>
                     </div>
@@ -249,4 +225,4 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
     );
 };
 
-export default AddProjectForm;
+export default AddAchievementForm;

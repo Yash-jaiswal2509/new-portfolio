@@ -1,4 +1,5 @@
-import AddProject from "@/components/develop/add-project";
+import AddAchievement from "@/components/develop/add-achievement/add-achievements";
+import AddProject from "@/components/develop/add-project/add-project";
 import AddResume from "@/components/develop/add-resume";
 
 const Develop = () => {
@@ -8,6 +9,7 @@ const Develop = () => {
       <div className="h-full w-full border border-white rounded-lg grid grid-cols-1 md:grid-cols-3 gap-4 relative p-2">
         <AddResume />
         <AddProject />
+        <AddAchievement />
       </div>
     </div>
   )

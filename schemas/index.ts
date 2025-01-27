@@ -39,3 +39,15 @@ export const AddProjectSchema = zod.object({
     message: 'Please enter a valid image link',
   }),
 });
+
+export const AddAchievementSchema = zod.object({
+  title: zod.string().min(3, {
+    message: 'Minimum title length is 3 characters',
+  }),
+  description: zod.string().min(10, {
+    message: 'Minimum description length is 10 characters',
+  }),
+  achievementImageUrl: zod.string().url({
+    message: 'Please enter a valid image link',
+  }),
+});
