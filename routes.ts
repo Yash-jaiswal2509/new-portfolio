@@ -6,6 +6,7 @@ export const publicRoutes: string[] = [
   '/contact',
   '/projects',
   '/api/admin/download-resume',
+  '/api/projects',
 ];
 
 export const authRoutes: string[] = ['/auth/login', '/auth/register'];

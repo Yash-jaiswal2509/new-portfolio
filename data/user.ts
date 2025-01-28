@@ -25,3 +25,16 @@ export const getUserById = async (id: string) => {
     return null;
   }
 };
+
+export const getAdmin = async () => {
+  try {
+    const result = await prisma.user.findFirst({
+      where: {
+        role: 'ADMIN',
+      },
+    });
+    return result;
+  } catch (error) {
+    return null;
+  }
+};

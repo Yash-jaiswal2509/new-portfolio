@@ -74,6 +74,9 @@ export default {
           },
         },
       },
+      boxShadow: {
+        'custom-light': '0px 0px 15px 2px #e2e8f0',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
