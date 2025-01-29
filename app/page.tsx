@@ -65,7 +65,7 @@ const Home = async () => {
                   <Card key={achievement.id} className="bg-transparent text-white backdrop-blur shadow-custom-light shadow-white">
                     <CardHeader>
                       <CardTitle className="text-center">{achievement.title}</CardTitle>
-                      <CardDescription>{achievement.description}</CardDescription>
+                      <CardDescription className="text-center">{achievement.description}</CardDescription>
                     </CardHeader>
                     <CardContent>
                       <Image

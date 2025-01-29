@@ -4,7 +4,7 @@ import GITHUB from '../public/social/github.png';
 import LINKEDIN from '../public/social/linkedin.png';
 import TWITTER from '../public/social/twitter.png';
 import MEDIUM from '../public/social/medium.png';
-import { SocialMediaProps, type NavbarItemsProps } from './types';
+import { SocialMediaProps, Submission, type NavbarItemsProps } from './types';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -63,3 +63,18 @@ export const socialMedia: SocialMediaProps[] = [
     icon: MEDIUM,
   },
 ];
+
+export function count_submissions(submissions: Submission[]): number {
+  const alreadySolved: Record<string, boolean> = {};
+  let count = 0;
+
+  for (const submission of submissions) {
+    const problemID = `${submission.problem.contestId}-${submission.problem.index}`;
+    if (submission.verdict === 'OK' && !alreadySolved[problemID]) {
+      count++;
+      alreadySolved[problemID] = true;
+    }
+  }
+
+  return count;
+}
