@@ -22,14 +22,18 @@ export default async function Projects() {
             });
 
             const data = await response.json();
+            if(data.success === false) {
+                return [];
+            }
+
             return data;
         } catch (error) {
-            return null;
+            return [];
         }
     }
 
     const data = await getProjects();
-    const projects: Project[] = data.projects;
+    const projects: Project[] = data.data.projects;
 
     return (
         <div className="h-full w-full relative p-10">
