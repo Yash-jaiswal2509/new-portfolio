@@ -3,25 +3,33 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Project } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import { BsGithub, BsLink45Deg } from "react-icons/bs";
-import { FaGithub } from "react-icons/fa";
+
 const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
-
 export default async function Projects() {
-    const response = await fetch(`${FrontendUrl}/api/projects`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        cache: "force-cache",
-        next: {
-            revalidate: 1000 * 24 * 60 * 60,
-        }
-    });
 
-    const data = await response.json();
-    const projects = data.data?.projects;
+    const getProjects = async () => {
+        try {
+            const response = await fetch(`${FrontendUrl}/api/projects`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                cache: "force-cache",
+                next: {
+                    revalidate: 1000 * 24 * 60 * 60,
+                }
+            });
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    const data = await getProjects();
+    const projects: Project[] = data.projects;
 
     return (
         <div className="h-full w-full relative p-10">
