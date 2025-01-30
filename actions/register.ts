@@ -2,7 +2,7 @@
 
 import * as zod from 'zod';
 import { RegisterSchema } from '@/schemas';
-import bcryptjs from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import prisma from '@/lib/db';
 import { getUserByEmail } from '@/data/user';
 
@@ -20,7 +20,7 @@ export const register = async (values: zod.infer<typeof RegisterSchema>) => {
     return { error: 'Email already exists' };
   }
 
-  const hashedPassword = await bcryptjs.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     await prisma.user.create({

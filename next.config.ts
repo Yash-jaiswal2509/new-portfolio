@@ -15,8 +15,13 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'silver-persistent-condor-602.mypinata.cloud',
-      }
+      },
     ],
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ['localhost:3000'],
+    },
   },
 };
 

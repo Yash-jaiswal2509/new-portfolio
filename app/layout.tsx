@@ -36,7 +36,7 @@ export default function RootLayout({
     <SessionProvider>
       <html lang="en" suppressHydrationWarning={true}>
         <body
-          className={cn("antialiased min-h-screen bg-black font-satoshi", satoshi.variable)}
+          className={cn("antialiased h-full bg-black font-satoshi", satoshi.variable)}
         >
           <ShootingStars
             minDelay={1000}

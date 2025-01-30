@@ -7,6 +7,8 @@ import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import DownloadResume from "@/components/home/download-resume";
 import { Achievement } from '@prisma/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShootingStars } from "@/components/ui/shooting-stars";
+import { StarsBackground } from "@/components/ui/stars-background";
 
 const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
@@ -26,7 +28,6 @@ const Home = async () => {
       });
 
       const data = await respone.json();
-      console.log(data);
       return data.data?.achievements;
     } catch (error) {
       return [];
@@ -41,7 +42,7 @@ const Home = async () => {
   ];
 
   return (
-    <div className="w-full flex items-center justify-center relative">
+    <div className="w-full h-fit flex items-center justify-center relative">
       <Spotlight
         className=""
         fill="grey"
@@ -59,7 +60,7 @@ const Home = async () => {
         <div className="mt-32 relative w-full">
           <p className="text-white text-2xl text-center font-semibold tracking-wider underline underline-offset-8">Some recent achievements</p>
           <div className="h-full w-full relative p-10">
-            <div className="h-full w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 relative p-2">
+            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 relative p-2">
               {achievements.map((achievement: Achievement) => {
                 return (
                   <Card key={achievement.id} className="bg-transparent text-white backdrop-blur shadow-custom-light shadow-white">
@@ -80,6 +81,19 @@ const Home = async () => {
                 )
               })}
             </div>
+            <ShootingStars
+              minDelay={1000}
+              maxDelay={2000}
+              minSpeed={5}
+              maxSpeed={10}
+              starColor="#325EAA"
+              trailColor="#E83D99"
+              starHeight={2}
+              starWidth={20} />
+            <StarsBackground
+              starDensity={0.0002}
+              allStarsTwinkle={true}
+            />
           </div>
         </div>
       </div>
