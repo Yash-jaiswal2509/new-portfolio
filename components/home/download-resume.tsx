@@ -18,7 +18,7 @@ const DownloadResume = () => {
                 const response = await axios.get(`${FrontendUrl}/api/admin/download-resume`, {
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
                 });
 
                 if (response.data.status !== 200) {
