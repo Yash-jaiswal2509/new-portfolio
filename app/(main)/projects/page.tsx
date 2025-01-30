@@ -38,7 +38,7 @@ export default async function Projects() {
     return (
         <div className="h-full w-full relative p-10">
             <div className="h-full w-full border border-white rounded-lg grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 relative p-2">
-                {projects.map((project: Project) => {
+                {projects && projects.map((project: Project) => {
                     return (
                         <Card key={project.id} className="bg-transparent text-white backdrop-blur shadow-custom-light shadow-white">
                             <CardHeader>
