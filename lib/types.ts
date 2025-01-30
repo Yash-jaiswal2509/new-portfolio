@@ -3,6 +3,7 @@ export type NavbarItemsProps = {
   href: string;
 };
 
+// @typescript-eslint/no-explicit-any
 export type SocialMediaProps = {
   name: string;
   href: string;
@@ -23,6 +24,7 @@ export type CodeforcesDataProps = {
   maxRank: string;
 };
 
+// @typescript-eslint/no-explicit-any
 export type Submission = {
   id: number;
   contestId: number;
@@ -31,9 +33,9 @@ export type Submission = {
   problem: {
     contestId: number;
     index: string;
-    [key: string]: any; // Allow other optional properties
+    [key: string]: any;
   };
-  author: { [key: string]: any }; // Allow optional properties
+  author: { [key: string]: any };
   programmingLanguage: string;
   verdict: string;
   testset: string;

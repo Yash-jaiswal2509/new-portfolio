@@ -13,6 +13,7 @@ const prismaClientSinleTon = () => {
 
 type prismaClientSinleTonType = ReturnType<typeof prismaClientSinleTon>;
 
+// eslint-disable-next-line
 const globalThisForPrisma = globalThis as unknown as {
   prisma: prismaClientSinleTonType | undefined;
 };
