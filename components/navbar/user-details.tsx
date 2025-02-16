@@ -1,50 +1,51 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/use-current-user"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import Image from "next/image";
-import LogoutButton from "../auth/logout-button";
+import { useRouter } from "next/navigation";
+import { LogOut, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { logout } from "@/actions/logout";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useSession } from "next-auth/react";
 
 const UserDetails = () => {
+    const router = useRouter();
+    const user = useCurrentUser();
     const { data: session, status } = useSession();
+
+    const onLogout = async () => {
+        try {
+            await logout();
+            window.location.href = "/";
+        } catch (error) {
+            console.error("Error during logout:", error);
+        }
+    };
 
     if (status !== "authenticated") {
         return null;
     }
 
     return (
-        <div>
-            <DropdownMenu>
-                <DropdownMenuTrigger className="relative rounded-full overflow-hidden">
-                    <Image
-                        src={session.user?.image || "/user-profile.jpg"}
-                        alt={session.user?.name || "User profile"}
-                        height={40}
-                        width={40}
-                    />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="flex flex-col w-full bg-black text-white px-4 bg-transparent mt-2">
-                    <DropdownMenuLabel>
-                        User profile
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuShortcut>
-                        Name: {session.user?.name}
-                    </DropdownMenuShortcut>
-                    <DropdownMenuShortcut>
-                        Email: {session.user?.email}
-                    </DropdownMenuShortcut>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuShortcut className="cursor-pointer my-5">
-                        <LogoutButton>
-                            Logout
-                        </LogoutButton>
-                    </DropdownMenuShortcut>
-                </DropdownMenuContent>
-            </DropdownMenu>
-        </div>
-    )
-}
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="icon">
+                    <User className="h-[1.2rem] w-[1.2rem]" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={onLogout}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+};
 
 export default UserDetails;
