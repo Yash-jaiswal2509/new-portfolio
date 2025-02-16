@@ -17,6 +17,8 @@ export const getProjects = cache(async () => {
         projectUrl: true,
         githubUrl: true,
         imageUrl: true,
+        createdAt: true,
+        projectDate: true,
       },
       where: {
         userId: adminId,

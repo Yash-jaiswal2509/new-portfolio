@@ -12,6 +12,10 @@ import { AchievementCard } from "@/components/achievement-card";
 const Home = async () => {
   const { achievements = [] } = await getAchievements();
 
+  const sortedAchievements = [...achievements].sort((a, b) =>
+    new Date(b.achievedAt).getTime() - new Date(a.achievedAt).getTime()
+  );
+
   const words = [
     { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-5xl text-white" },
     { text: "Software Engineer.", className: "text-5xl text-blue-500" },
@@ -30,7 +34,9 @@ const Home = async () => {
 
         <div className="inline-flex space-x-4 mt-4">
           <DownloadResume />
-          <Link href={"/projects"}><Button className="home-button" variant={"custom"}>Projects <ShoppingBag /></Button></Link>
+          <Link href={"/projects"}>
+            <Button className="home-button" variant={"custom"}>Projects <ShoppingBag /></Button>
+          </Link>
         </div>
 
         <div className="mt-32 relative w-full">
@@ -39,7 +45,7 @@ const Home = async () => {
           </h2>
           <div className="h-full w-full relative p-10">
             <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 relative p-2">
-              {achievements.map((achievement) => (
+              {sortedAchievements.map((achievement) => (
                 <AchievementCard key={achievement.id} achievement={achievement} />
               ))}
             </div>

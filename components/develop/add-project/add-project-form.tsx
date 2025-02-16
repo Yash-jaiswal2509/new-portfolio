@@ -11,6 +11,7 @@ import axios from "axios";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
+import { DatePicker } from "@/components/ui/date-picker";
 
 const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
@@ -32,7 +33,9 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
             description: "",
             projectLink: "",
             projectGithub: "",
-            projectImage: ""
+            projectImage: "",
+            createdAt: new Date(),
+            projectDate: new Date(),
         }
     });
 
@@ -233,6 +236,21 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                                                         }} src={imageUrl} alt="Poject Image" height={100} width={100} className="rounded-sm" />
                                                     )}
                                                 </div>
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="createdAt"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Project Date</FormLabel>
+                                            <FormControl>
+                                                <DatePicker
+                                                    date={field.value}
+                                                    onChange={field.onChange}
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}

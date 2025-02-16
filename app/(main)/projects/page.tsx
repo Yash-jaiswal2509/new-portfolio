@@ -9,6 +9,8 @@ type ProjectData = {
     projectUrl: string;
     githubUrl: string;
     imageUrl: string;
+    createdAt: Date;
+    projectDate: Date;
 }
 
 export default async function Projects() {
@@ -39,10 +41,14 @@ export default async function Projects() {
         );
     }
 
+    const sortedProjects = [...projects].sort((a, b) =>
+        new Date(b.projectDate).getTime() - new Date(a.projectDate).getTime()
+    );
+
     return (
         <div className="h-full w-full p-6 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-                {projects.map((project: ProjectData) => (
+                {sortedProjects.map((project: ProjectData) => (
                     <ProjectCard key={project.id} project={project} />
                 ))}
             </div>

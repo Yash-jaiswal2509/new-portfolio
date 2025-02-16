@@ -14,6 +14,8 @@ export const getAchievements = async () => {
         title: true,
         description: true,
         achievementImageUrl: true,
+        createdAt: true,
+        achievedAt: true,
       },
       where: {
         userId: adminId,

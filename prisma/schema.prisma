@@ -55,6 +55,7 @@ model Project {
   githubUrl   String
   projectUrl  String
   createdAt   DateTime @default(now())
+  projectDate DateTime
 
   @@map("projects")
 }
@@ -66,6 +67,7 @@ model Achievement {
   description         String
   achievementImageUrl String
   createdAt           DateTime @default(now())
+  achievedAt          DateTime
 
   @@map("achievements")
 }

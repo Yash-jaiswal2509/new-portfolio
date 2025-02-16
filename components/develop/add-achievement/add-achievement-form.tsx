@@ -1,5 +1,3 @@
-
-
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,6 +11,7 @@ import axios from "axios";
 import Image from "next/image";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
+import { DatePicker } from "@/components/ui/date-picker";
 
 const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
@@ -33,6 +32,7 @@ const AddAchievementForm = ({ show, setShow }: AddAchievementProps) => {
             title: "",
             description: "",
             achievementImageUrl: "",
+            achievedAt: new Date(),
         }
     });
 
@@ -209,6 +209,22 @@ const AddAchievementForm = ({ show, setShow }: AddAchievementProps) => {
                                                         }} src={imageUrl} alt="Achievement Image" height={100} width={100} className="rounded-sm" />
                                                     )}
                                                 </div>
+                                            </FormControl>
+                                        </FormItem>
+                                    )}
+                                />
+
+                                <FormField
+                                    control={form.control}
+                                    name="achievedAt"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Achievement Date</FormLabel>
+                                            <FormControl>
+                                                <DatePicker
+                                                    date={field.value}
+                                                    onChange={field.onChange}
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
