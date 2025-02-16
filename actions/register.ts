@@ -6,8 +6,6 @@ import bcrypt from 'bcryptjs';
 import prisma from '@/lib/db';
 import { getUserByEmail } from '@/data/user';
 
-export const runtime = 'nodejs';
-
 export const register = async (values: zod.infer<typeof RegisterSchema>) => {
   const validatedFields = RegisterSchema.safeParse(values);
 
