@@ -15,16 +15,11 @@ const DownloadResume = () => {
     useEffect(() => {
         const fetchResume = async () => {
             try {
-                const response = await axios.get(`${FrontendUrl}/api/admin/download-resume`, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                });
+                const response = await axios.get(`${FrontendUrl}/api/admin/download-resume`);
 
                 if (response.data.status !== 200) {
-                    toast.error(response.data.message || 'Something went wrong', {
-                        className: 'text-red-500 bg-transparent'
-                    });
+                    toast.error(response.data.message || 'Something went wrong');
+                    return;
                 }
 
                 const { resume } = response.data;
@@ -39,10 +34,11 @@ const DownloadResume = () => {
         fetchResume();
     }, []);
 
-
     const handleDownload = async () => {
         if (!resumeLink) return;
+
         setIsLoading(true);
+
         try {
             const link = document.createElement("a");
             link.href = resumeLink;
@@ -52,11 +48,11 @@ const DownloadResume = () => {
             document.body.removeChild(link);
         } catch (error) {
             console.error("Error downloading resume:", error);
-            toast.error("An error occurred while downloading resume", {
-                className: 'text-red-500 bg-transparent'
-            });
+            toast.error("An error occurred while downloading resume");
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 2000);
         }
     };
 
@@ -69,7 +65,7 @@ const DownloadResume = () => {
         >
             {isLoading ? (
                 <>
-                    Downloading... <Loader className="animate-spin ml-2" />
+                    Downloading... <Loader className="ml-2 animate-spin" />
                 </>
             ) : (
                 <>
