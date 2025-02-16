@@ -2,8 +2,9 @@
 
 import { getAdmin } from '@/data/user';
 import prisma from '@/lib/db';
+import { cache } from 'react';
 
-export const getProjects = async () => {
+export const getProjects = cache(async () => {
   try {
     const admin = await getAdmin();
     const adminId = admin?.id as string;
@@ -31,4 +32,4 @@ export const getProjects = async () => {
       projects: [],
     };
   }
-};
+});

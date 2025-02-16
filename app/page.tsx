@@ -1,18 +1,13 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Spotlight } from "@/components/ui/spotlight";
 import { ShoppingBag } from "lucide-react";
 import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
 import DownloadResume from "@/components/home/download-resume";
-import { Achievement } from '@prisma/client';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import { getAchievements } from "@/actions/get-achievements";
 import { AchievementCard } from "@/components/achievement-card";
-
-const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
 
 const Home = async () => {
   const { achievements = [] } = await getAchievements();

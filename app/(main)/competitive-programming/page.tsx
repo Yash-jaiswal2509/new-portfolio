@@ -2,8 +2,9 @@ import CardProfile from "./CardProfile";
 import { Chart } from "./chart";
 import { getCodeForcesStats, getLeetCodeStats, getCodeChefStats } from "@/services/competitive-programming";
 
+export const revalidate = 3600; 
+
 export default async function CompetitiveProgramming() {
-  // Fetch all data in parallel
   const [cfStats, leetcodeProblems, codechefStats] = await Promise.all([
     getCodeForcesStats(),
     getLeetCodeStats(),
@@ -30,11 +31,6 @@ export default async function CompetitiveProgramming() {
       problemSolved: 84,
     },
   };
-
-  const totalProblems = Object.values(stats).reduce(
-    (sum, platform) => sum + (platform.problemSolved || 0),
-    0
-  );
 
   return (
     <div className="text-white p-5 gap-4 relative">
