@@ -1,8 +1,9 @@
 import CardProfile from "./CardProfile";
 import { Chart } from "./chart";
 import { getCodeForcesStats, getLeetCodeStats, getCodeChefStats } from "@/services/competitive-programming";
+import AnimatedContainer from "@/components/about/animated-container";
 
-export const revalidate = 3600; 
+export const revalidate = 3600;
 
 export default async function CompetitiveProgramming() {
   const [cfStats, leetcodeProblems, codechefStats] = await Promise.all([
@@ -23,46 +24,54 @@ export default async function CompetitiveProgramming() {
       currentRating: 2040,
     },
     codechef: {
-      problemSolved: 68,
-      maxRating: codechefStats.highestRating,
-      currentRating: codechefStats.currentRating,
+      problemSolved: codechefStats.problemsSolved || 68,
+      maxRating: codechefStats.highestRating || 0,
+      currentRating: codechefStats.currentRating || 0,
     },
     geeksforgeeks: {
-      problemSolved: 84,
+      problemSolved: 86,
+      maxRating: 0,
+      currentRating: 0,
     },
   };
 
   return (
-    <div className="text-white p-5 gap-4 relative">
-      <div className="grid grid-cols-3 gap-4">
-        <CardProfile
-          cardTitleImagePath="/Logos/cf.png"
-          imageHeight={100}
-          imageWidth={200}
-          {...stats.codeforces}
-        />
-        <CardProfile
-          cardTitleImagePath="/Logos/leetcode.svg"
-          imageHeight={50}
-          imageWidth={220}
-          {...stats.leetcode}
-        />
-        <CardProfile
-          cardTitleImagePath="/Logos/codechef.png"
-          imageHeight={20}
-          imageWidth={200}
-          {...stats.codechef}
-        />
-      </div>
-      <div className="w-full h-full">
-        <div className="flex justify-center items-center">
-          <Chart
-            cfProblemSolved={stats.codeforces.problemSolved}
-            leetcodeProblemSolved={stats.leetcode.problemSolved}
-            codeChefProblemSolved={stats.codechef.problemSolved}
-            geekForGeeksProblemSolved={stats.geeksforgeeks.problemSolved}
-          />
-        </div>
+    <div className="min-h-screen w-full p-6 md:p-10 text-white">
+      <div className="max-w-6xl mx-auto space-y-8">
+        <AnimatedContainer>
+          <h1 className="text-3xl font-bold mb-8 text-center">Competitive Programming Stats</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <CardProfile
+              cardTitleImagePath="/Logos/codeforces.png"
+              imageHeight={20}
+              imageWidth={200}
+              {...stats.codeforces}
+            />
+            <CardProfile
+              cardTitleImagePath="/Logos/leetcode.svg"
+              imageHeight={20}
+              imageWidth={200}
+              {...stats.leetcode}
+            />
+            <CardProfile
+              cardTitleImagePath="/Logos/codechef.png"
+              imageHeight={20}
+              imageWidth={200}
+              {...stats.codechef}
+            />
+          </div>
+        </AnimatedContainer>
+
+        <AnimatedContainer>
+          <div className="flex justify-center items-center">
+            <Chart
+              cfProblemSolved={stats.codeforces.problemSolved}
+              leetcodeProblemSolved={stats.leetcode.problemSolved}
+              codeChefProblemSolved={stats.codechef.problemSolved}
+              geekForGeeksProblemSolved={stats.geeksforgeeks.problemSolved}
+            />
+          </div>
+        </AnimatedContainer>
       </div>
     </div>
   );
