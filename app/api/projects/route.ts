@@ -1,11 +1,13 @@
 import { getProjects } from '@/actions/get-projects';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export const runtime = 'nodejs';
+
+export async function GET() {
   try {
     const data = await getProjects();
 
-    if (!data) {
+    if (!data.success) {
       return NextResponse.json({
         status: 404,
         message: 'No projects found',

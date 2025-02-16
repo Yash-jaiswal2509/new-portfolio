@@ -8,6 +8,8 @@ import { LoginSchema } from './schemas';
 import { getUserByEmail } from './data/user';
 import bcrypt from 'bcryptjs';
 
+export const runtime = 'nodejs';
+
 export default {
   providers: [
     Google({
@@ -29,9 +31,14 @@ export default {
           if (!user || !user.password) {
             return null;
           }
-          const isValid = await bcrypt.compare(password, user.password);
-          
-          if (isValid) return user;
+
+          try {
+            const isValid = await bcrypt.compare(password, user.password);
+            if (isValid) return user;
+          } catch (error) {
+            console.error('Error comparing passwords:', error);
+            return null;
+          }
         }
 
         return null;

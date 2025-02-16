@@ -6,6 +6,8 @@ import bcrypt from 'bcryptjs';
 import prisma from '@/lib/db';
 import { getUserByEmail } from '@/data/user';
 
+export const runtime = 'nodejs';
+
 export const register = async (values: zod.infer<typeof RegisterSchema>) => {
   const validatedFields = RegisterSchema.safeParse(values);
 
@@ -20,9 +22,8 @@ export const register = async (values: zod.infer<typeof RegisterSchema>) => {
     return { error: 'Email already exists' };
   }
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     await prisma.user.create({
       data: {
         name,
@@ -31,6 +32,7 @@ export const register = async (values: zod.infer<typeof RegisterSchema>) => {
       },
     });
   } catch (error) {
+    console.error('Error during registration:', error);
     return { error: 'Something went wrong' };
   }
 

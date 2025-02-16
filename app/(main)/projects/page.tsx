@@ -1,50 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Project } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsLink } from "react-icons/bs";
+import { getProjects } from "@/actions/get-projects"; 
 
-const FrontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
-
-async function getProjects() {
-    if (!FrontendUrl) {
-        console.error('NEXT_PUBLIC_FRONTEND_URL is not defined');
-        return [];
-    }
-
-    const url = `${FrontendUrl}/api/projects`;
-    try {
-        const response = await fetch(url, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            cache: "force-cache",
-            next: {
-                revalidate: 60 * 60 * 24, // 24 hours
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        if (data.status !== 200) {
-            console.error('API returned success: false', data);
-            return [];
-        }
-
-        const projects = data.data?.projects || [];
-        return projects;
-
-    } catch (error) {
-        console.error('Failed to fetch projects:', error);
-        return [];
-    }
+type ProjectWithoutMetadata = {
+    id: string;
+    name: string;
+    description: string;
+    projectUrl: string;
+    githubUrl: string;
+    imageUrl: string;
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project }: { project: ProjectWithoutMetadata }) {
     return (
         <Card className="bg-transparent text-white backdrop-blur shadow-lg border border-white/10 hover:border-white/20 transition-all">
             <CardHeader>
@@ -87,15 +57,16 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default async function Projects() {
-    const projects = await getProjects();
+    // Use the server action directly instead of fetching through API
+    const { success, projects = [] } = await getProjects();
 
-    if (!projects || projects.length === 0) {
+    if (!success || !projects.length) {
         return (
             <div className="h-full w-full flex items-center justify-center p-10">
                 <Card className="bg-transparent text-white backdrop-blur p-6">
                     <CardContent>
                         <p className="text-lg text-center">No projects available at the moment.</p>
-                        <p className="text-sm text-gray-400 mt-2 text-center">Please check your API configuration and data.</p>
+                        <p className="text-sm text-gray-400 mt-2 text-center">Please check your data configuration.</p>
                     </CardContent>
                 </Card>
             </div>
@@ -105,7 +76,7 @@ export default async function Projects() {
     return (
         <div className="h-full w-full p-6 md:p-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
-                {projects.map((project: Project) => (
+                {projects.map((project: ProjectWithoutMetadata) => (
                     <ProjectCard key={project.id} project={project} />
                 ))}
             </div>
