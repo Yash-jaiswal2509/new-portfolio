@@ -73,6 +73,14 @@ body {
 
 @layer utilities {
   .home-button {
-    @apply text-lg px-10 py-6 cursor-pointer tracking-wider;
+    @apply cursor-pointer px-10 py-6 text-lg tracking-wider;
   }
+}
+
+.achievement-card {
+  @apply rounded-lg border border-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:border-white/20;
+}
+
+.achievement-card:hover {
+  @apply -translate-y-1 transform;
 }
