@@ -20,7 +20,7 @@ export const addProject = async ({
 
   try {
     const data = validatedFields.data;
-    const { name, description, projectGithub, projectImage, projectLink } =
+    const { name, description, projectGithub, projectImage, projectLink, projectDate } =
       data;
 
     await prisma.project.create({
@@ -30,6 +30,7 @@ export const addProject = async ({
         projectUrl: projectLink,
         githubUrl: projectGithub,
         imageUrl: projectImage,
+        projectDate: projectDate,
         userId,
       },
     });

@@ -20,13 +20,14 @@ export const addAchievement = async ({
 
   try {
     const data = validatedFields.data;
-    const { title, description, achievementImageUrl } = data;
+    const { title, description, achievementImageUrl, achievedAt } = data;
 
     await prisma.achievement.create({
       data: {
         title: title,
         description: description,
         achievementImageUrl: achievementImageUrl,
+        achievedAt: achievedAt,
         userId,
       },
     });
