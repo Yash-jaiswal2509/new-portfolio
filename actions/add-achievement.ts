@@ -21,7 +21,7 @@ export const addAchievement = async ({
   try {
     const data = validatedFields.data;
     const { title, description, achievementImageUrl, achievedAt } = data;
-
+    console.log(data);
     await prisma.achievement.create({
       data: {
         title: title,
@@ -31,7 +31,9 @@ export const addAchievement = async ({
         userId,
       },
     });
+    console.log('Achievement added successfully');
   } catch (error) {
+    console.log(error);
     return { success: false, message: 'Error adding project' };
   }
 

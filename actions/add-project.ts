@@ -23,6 +23,8 @@ export const addProject = async ({
     const { name, description, projectGithub, projectImage, projectLink, projectDate } =
       data;
 
+    console.log(data);
+
     await prisma.project.create({
       data: {
         name: name,
@@ -34,7 +36,10 @@ export const addProject = async ({
         userId,
       },
     });
+
+    console.log('Project added successfully');
   } catch (error) {
+    console.log(error);
     return { success: false, message: 'Error adding project' };
   }
 
