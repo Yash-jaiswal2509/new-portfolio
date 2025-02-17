@@ -4,7 +4,7 @@ import * as zod from 'zod';
 import { AddAchievementSchema } from '@/schemas';
 import prisma from '@/lib/db';
 
-type AddProjectDataProps = {
+type AddAchievementDataProps = {
   values: zod.infer<typeof AddAchievementSchema>;
   userId: string;
 };
@@ -12,30 +12,26 @@ type AddProjectDataProps = {
 export const addAchievement = async ({
   values,
   userId,
-}: AddProjectDataProps) => {
-  const validatedFields = AddAchievementSchema.safeParse(values);
-  if (!validatedFields.success) {
-    return { error: 'Invalid fields' };
-  }
-
+}: AddAchievementDataProps) => {
   try {
-    const data = validatedFields.data;
-    const { title, description, achievementImageUrl, achievedAt } = data;
-    console.log(data);
+    const validatedFields = AddAchievementSchema.safeParse(values);
+    if (!validatedFields.success) {
+      return { success: false, error: 'Invalid fields' };
+    }
+
     await prisma.achievement.create({
       data: {
-        title: title,
-        description: description,
-        achievementImageUrl: achievementImageUrl,
-        achievedAt: achievedAt,
+        title: values.title,
+        description: values.description,
+        achievementImageUrl: values.achievementImageUrl,
+        achievedAt: values.achievedAt,
         userId,
       },
     });
-    console.log('Achievement added successfully');
-  } catch (error) {
-    console.log(error);
-    return { success: false, message: 'Error adding project' };
-  }
 
-  return { success: true, message: 'Achievement added successfully' };
+    return { success: true, message: 'Achievement added successfully' };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Error adding achievement' };
+  }
 };

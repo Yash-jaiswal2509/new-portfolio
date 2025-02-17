@@ -17,23 +17,32 @@ export async function POST(req: NextRequest) {
     const user = await currentUser();
     const userId = user?.id as string;
 
-    const response = await addAchievement({ values: data, userId });
-    if (!response?.success) {
+    // Clean up the data
+    const achievementData = {
+      title: data.title,
+      description: data.description,
+      achievementImageUrl: data.achievementImageUrl,
+      achievedAt: new Date(data.achievedAt),
+    };
+
+    const result = await addAchievement({ values: achievementData, userId });
+
+    if (!result.success) {
       return NextResponse.json({
-        status: 500,
-        message: response?.message || 'Failed to upload achievement',
+        status: 400,
+        message: result.error || 'Failed to add achievement',
       });
     }
+
+    return NextResponse.json({
+      status: 200,
+      message: 'Achievement added successfully',
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({
       status: 500,
-      message: 'An error occurred while uploading achievement',
+      message: 'Internal server error',
     });
   }
-
-  return NextResponse.json({
-    status: 200,
-    message: 'Achievement uploaded successfully',
-  });
 }

@@ -34,8 +34,8 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
             projectLink: "",
             projectGithub: "",
             projectImage: "",
-            createdAt: new Date(),
             projectDate: new Date(),
+            userId: ""
         }
     });
 
@@ -100,11 +100,17 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
 
     const handleSubmit = async (values: z.infer<typeof AddProjectSchema>) => {
         setIsLoading(true);
-        try {
-            const response = await axios.post(`${FrontendUrl}/api/admin/add-project`, values);
 
-            if (response.data.status !== 200) {
-                console.error('Failed to submit project', response.data.message);
+        try {
+            const response = await axios.get(`${FrontendUrl}/api/auth/session`);
+            const userId = response.data?.user?.id;
+
+            const projectData = { ...values, userId };
+
+            const submitResponse = await axios.post(`${FrontendUrl}/api/admin/add-project`, projectData);
+
+            if (submitResponse.data.status !== 200) {
+                console.error('Failed to submit project', submitResponse.data.message);
                 toast.error('Failed to submit project', {
                     className: 'text-red-500 bg-transparent'
                 });
@@ -242,7 +248,7 @@ const AddProjectForm = ({ show, setShow }: AddProjectFormProps) => {
                                 />
                                 <FormField
                                     control={form.control}
-                                    name="createdAt"
+                                    name="projectDate"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>Project Date</FormLabel>

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 const UserDetails = () => {
     const { data: session, status } = useSession();
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
         if (isLoggingOut && status !== "authenticated") {
@@ -20,6 +21,7 @@ const UserDetails = () => {
         try {
             setIsLoggingOut(true);
             await logout();
+            setShowDropdown(false);
         } catch (error) {
             console.error("Error during logout:", error);
             setIsLoggingOut(false);

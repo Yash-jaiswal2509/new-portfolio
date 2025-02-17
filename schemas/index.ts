@@ -39,6 +39,7 @@ export const AddProjectSchema = zod.object({
     message: 'Please enter a valid image link',
   }),
   projectDate: zod.date(),
+  userId: zod.string().optional(),
 });
 
 export const AddAchievementSchema = zod.object({

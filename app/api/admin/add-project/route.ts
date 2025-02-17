@@ -17,23 +17,35 @@ export async function POST(req: NextRequest) {
     const user = await currentUser();
     const userId = user?.id as string;
 
-    const response = await addProject({ values: data, userId });
-    if (!response?.success) {
+    // Ensure no duplicate fields
+    const projectData = {
+      name: data.name,
+      description: data.description,
+      projectLink: data.projectLink,
+      projectGithub: data.projectGithub,
+      projectImage: data.projectImage,
+      projectDate: new Date(data.projectDate),
+      userId: userId,
+    };
+
+    const result = await addProject({ values: projectData, userId: userId });
+
+    if (!result.success) {
       return NextResponse.json({
-        status: 500,
-        message: response?.message || 'Failed to upload project',
+        status: 400,
+        message: result.error || 'Failed to add project',
       });
     }
+
+    return NextResponse.json({
+      status: 200,
+      message: 'Project added successfully',
+    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({
       status: 500,
-      message: 'An error occurred while uploading project',
+      message: 'Internal server error',
     });
   }
-
-  return NextResponse.json({
-    status: 200,
-    message: 'Project uploaded successfully',
-  });
 }
