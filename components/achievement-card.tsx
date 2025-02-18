@@ -30,10 +30,10 @@ const AchievementCard = ({ achievement, index }: AchievementCardProps) => {
         >
             <Card className="glow-card bg-transparent text-white backdrop-blur shadow-lg border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1 duration-300">
                 <CardHeader>
-                    <CardTitle className="text-xl font-bold text-center relative">
+                    <CardTitle className="text-lg md:text-xl font-bold text-center relative">
                         {achievement.title}
                     </CardTitle>
-                    <CardDescription className="text-gray-600">
+                    <CardDescription className="text-gray-600 text-sm md:text-base">
                         {achievement.description}
                     </CardDescription>
                 </CardHeader>
@@ -51,7 +51,7 @@ const AchievementCard = ({ achievement, index }: AchievementCardProps) => {
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                     </motion.div>
-                    <p className="text-sm text-gray-400 mt-4">
+                    <p className="text-xs md:text-sm text-gray-400 mt-4">
                         Achieved on: {new Date(achievement.achievedAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',

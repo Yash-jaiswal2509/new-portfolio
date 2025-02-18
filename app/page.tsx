@@ -19,8 +19,8 @@ const Home = async () => {
   console.log(sortedAchievements);
 
   const words = [
-    { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
-    { text: "Software Engineer.", className: "text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
+    { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
+    { text: "Software Engineer.", className: "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
   ];
 
   return (
@@ -31,7 +31,7 @@ const Home = async () => {
       />
 
       <div className="mt-16 md:mt-32 flex items-center flex-col">
-        <p className="text-white">A 2026 aspirant currently looking for jobs or internship</p>
+        <p className="text-white text-sm md:text-base">A 2026 aspirant currently looking for jobs or internship</p>
         <TypewriterEffectSmooth words={words} />
 
         <div className="inline-flex space-x-4 mt-4">
@@ -53,7 +53,7 @@ const Home = async () => {
             starWidth={20}
           />
           <StarsBackground starDensity={0.0002} allStarsTwinkle />
-          <h2 className="text-white text-2xl text-center font-semibold tracking-wider underline underline-offset-8">
+          <h2 className="text-white text-xl sm:text-2xl text-center font-semibold tracking-wider underline underline-offset-8">
             Some recent achievements
           </h2>
           <div className="h-full w-full relative p-10">
