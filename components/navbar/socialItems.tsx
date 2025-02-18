@@ -13,7 +13,7 @@ const SocialItems = ({ socialItems }: SocalProps) => {
     const [tootTip, setToolTip] = useState<string | null>(null);
 
     return (
-        <div className="flex items-center gap-8 relative">
+        <div className="w-full justify-end items-center gap-6 xl:gap-8 relative flex">
             {
                 socialItems.map((item, index) => {
                     return (
@@ -27,7 +27,8 @@ const SocialItems = ({ socialItems }: SocalProps) => {
                                 alt={item.name}
                                 width={25}
                                 height={25}
-                                className="size-full rounded-full"
+                                sizes="(max-width: 640px) 16px 16px, (max-width: 768px) 22px, 22px (max-width: 1024px) 28px, 28px"
+                                className="rounded-full"
                                 onMouseOver={() => setToolTip(item.name)}
                                 onMouseOut={() => setToolTip(null)}
                             />

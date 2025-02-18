@@ -19,8 +19,8 @@ const Home = async () => {
   console.log(sortedAchievements);
 
   const words = [
-    { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-5xl text-white" },
-    { text: "Software Engineer.", className: "text-5xl text-blue-500" },
+    { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
+    { text: "Software Engineer.", className: "text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
   ];
 
   return (
@@ -30,14 +30,14 @@ const Home = async () => {
         fill="grey"
       />
 
-      <div className="mt-32 flex items-center flex-col">
+      <div className="mt-16 md:mt-32 flex items-center flex-col">
         <p className="text-white">A 2026 aspirant currently looking for jobs or internship</p>
         <TypewriterEffectSmooth words={words} />
 
         <div className="inline-flex space-x-4 mt-4">
           <DownloadResume />
           <Link href={"/projects"}>
-            <Button className="home-button" variant={"custom"}>Projects <ShoppingBag /></Button>
+            <Button className="home-button" variant={"custom"}>Projects <ShoppingBag className="size-4 md:size-5 lg:size-6 xl:size-7" /></Button>
           </Link>
         </div>
 
@@ -57,7 +57,7 @@ const Home = async () => {
             Some recent achievements
           </h2>
           <div className="h-full w-full relative p-10">
-            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 relative p-2">
+            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 relative p-2">
               {sortedAchievements.map((achievement, index) => (
                 <AchievementCard
                   key={achievement.id}

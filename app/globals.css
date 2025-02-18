@@ -73,7 +73,7 @@ body {
 
 @layer utilities {
   .home-button {
-    @apply cursor-pointer px-10 py-6 text-lg tracking-wider;
+    @apply cursor-pointer px-6 py-4 text-sm lg:text-lg lg:px-10 lg:py-6 tracking-wider;
   }
 }
 
