@@ -28,7 +28,7 @@ const CardProfile = ({ cardTitleImagePath, imageHeight, imageWidth, problemSolve
                     </div>
                 </CardHeader>
                 <CardFooter>
-                    <div className="grid grid-rows-2 grid-cols-3 gap-2 text-center font-bold mt-5">
+                    <div className="grid grid-rows-2 grid-cols-3 gap-2 text-center font-bold mt-5 mx-auto">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -36,7 +36,7 @@ const CardProfile = ({ cardTitleImagePath, imageHeight, imageWidth, problemSolve
                         >
                             <CardTitle>Max Rating</CardTitle>
                             <CardDescription>{maxRating}</CardDescription>
-                        </motion.div>
+                        </motion.div>   
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}

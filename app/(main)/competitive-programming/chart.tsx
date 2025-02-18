@@ -74,19 +74,21 @@ export const Chart = ({ cfProblemSolved, leetcodeProblemSolved, codeChefProblemS
     }, []);
 
     return (
-        <div className="flex gap-10 items-center">
+        <div className="flex flex-col md:flex-row gap-10 items-center">
             <div className="my-auto">
                 <Doughnut options={options} data={chartData} width={400} height={400} />
             </div>
-            <div className="my-auto space-y-2">
-                <h1>Codeforces: {cfProblemSolved}</h1>
-                <h1>LeetCode: {leetcodeProblemSolved}</h1>
-                <h1>CodeChef: {codeChefProblemSolved}</h1>
-                <h1>GeekForGeeks: {geekForGeeksProblemSolved}</h1>
-            </div>
-            <div className="text-xl text-center font-bold">
-                <h1>Total Problems</h1>
-                <p>{totalProblemSolved}</p>
+            <div className="flex items-center gap-4">
+                <div className="my-auto space-y-2">
+                    <h1>Codeforces: {cfProblemSolved}</h1>
+                    <h1>LeetCode: {leetcodeProblemSolved}</h1>
+                    <h1>CodeChef: {codeChefProblemSolved}</h1>
+                    <h1>GeekForGeeks: {geekForGeeksProblemSolved}</h1>
+                </div>
+                <div className="text-xl text-center font-bold">
+                    <h1>Total Problems</h1>
+                    <p>{totalProblemSolved}</p>
+                </div>
             </div>
         </div>
     );
