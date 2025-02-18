@@ -15,7 +15,7 @@ type ProjectData = {
 
 export function ProjectCard({ project }: { project: ProjectData }) {
     return (
-        <Card className="bg-transparent text-white backdrop-blur shadow-lg border border-white/10 hover:border-white/20 transition-all">
+        <Card className="glow-card bg-transparent text-white backdrop-blur shadow-lg border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1 duration-300">
             <CardHeader>
                 <CardTitle className="text-xl font-bold">{project.name}</CardTitle>
                 <CardDescription className="text-gray-300">{project.description}</CardDescription>

@@ -111,3 +111,32 @@ body {
 .user-dropdown-item {
   @apply hover:bg-white/10 transition-colors duration-200;
 }
+
+.glow-card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.glow-card::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    circle at center,
+    rgba(89, 139, 255, 0.1) 0%,
+    transparent 70%
+  );
+  animation: rotate 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg) translate(-25%, -25%);
+  }
+  to {
+    transform: rotate(360deg) translate(-25%, -25%);
+  }
+}

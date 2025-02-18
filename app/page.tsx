@@ -7,7 +7,7 @@ import DownloadResume from "@/components/home/download-resume";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import { StarsBackground } from "@/components/ui/stars-background";
 import { getAchievements } from "@/actions/get-achievements";
-import { AchievementCard } from "@/components/achievement-card";
+import AchievementCard from "@/components/achievement-card";
 
 const Home = async () => {
   const { achievements = [] } = await getAchievements();
@@ -15,6 +15,8 @@ const Home = async () => {
   const sortedAchievements = [...achievements].sort((a, b) =>
     new Date(b.achievedAt).getTime() - new Date(a.achievedAt).getTime()
   );
+
+  console.log(sortedAchievements);
 
   const words = [
     { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-5xl text-white" },
@@ -39,27 +41,31 @@ const Home = async () => {
           </Link>
         </div>
 
-        <div className="mt-32 relative w-full">
+        <div className="mt-32 w-full">
+          <ShootingStars
+            minDelay={1000}
+            maxDelay={2000}
+            minSpeed={5}
+            maxSpeed={10}
+            starColor="#325EAA"
+            trailColor="#E83D99"
+            starHeight={2}
+            starWidth={20}
+          />
+          <StarsBackground starDensity={0.0002} allStarsTwinkle />
           <h2 className="text-white text-2xl text-center font-semibold tracking-wider underline underline-offset-8">
             Some recent achievements
           </h2>
           <div className="h-full w-full relative p-10">
             <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-4 relative p-2">
-              {sortedAchievements.map((achievement) => (
-                <AchievementCard key={achievement.id} achievement={achievement} />
+              {sortedAchievements.map((achievement, index) => (
+                <AchievementCard
+                  key={achievement.id}
+                  achievement={achievement}
+                  index={index}
+                />
               ))}
             </div>
-            <ShootingStars
-              minDelay={1000}
-              maxDelay={2000}
-              minSpeed={5}
-              maxSpeed={10}
-              starColor="#325EAA"
-              trailColor="#E83D99"
-              starHeight={2}
-              starWidth={20}
-            />
-            <StarsBackground starDensity={0.0002} allStarsTwinkle />
           </div>
         </div>
       </div>
