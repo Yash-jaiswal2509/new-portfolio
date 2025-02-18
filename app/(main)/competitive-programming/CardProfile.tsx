@@ -24,11 +24,11 @@ const CardProfile = ({ cardTitleImagePath, imageHeight, imageWidth, problemSolve
             <Card className="bg-transparent text-white hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300">
                 <CardHeader>
                     <div className="flex mx-auto bg-white overflow-hidden rounded-md p-1">
-                        <Image src={cardTitleImagePath} alt="Platform Logo" width={imageWidth} height={imageHeight} className="h-12 object-cover" />
+                        <Image src={cardTitleImagePath} alt="Platform Logo" width={imageWidth} height={imageHeight} className="h-10  sm:h-12 object-cover" />
                     </div>
                 </CardHeader>
                 <CardFooter>
-                    <div className="grid grid-rows-2 grid-cols-3 gap-2 text-center font-bold mt-5 mx-auto">
+                    <div className="grid sm:text-base text-sm grid-rows-1 grid-cols-3 gap-2 text-center font-bold sm:mt-5 mx-auto">
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}

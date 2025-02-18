@@ -48,7 +48,7 @@ export default function MobileNavbar() {
             className={cn(
                 "fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50",
                 "bg-transparent border border-white/10 backdrop-blur text-white rounded-full",
-                "w-[95%] max-w-lg h-fit px-8 pb-2",
+                "w-[95%] max-w-lg h-fit px-4 sm:px-8 pb-2",
                 "overflow-visible",
                 "flex justify-around items-center",
                 "transition-transform duration-300",
@@ -72,13 +72,13 @@ export default function MobileNavbar() {
                                 "flex items-center justify-center p-3 rounded-full",
                                 "transition-all duration-300 ease-in-out",
                                 isActive
-                                    ? "bg-blue-600 scale-150 translate-y-[-20px]"
+                                    ? "bg-blue-600 scale-125 sm:scale-150 translate-y-[-20px]"
                                     : "bg-transparent translate-y-0"
                             )}
                         >
                             <Icon
                                 className={cn(
-                                    "w-5 h-5 transition-colors duration-300",
+                                    "w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300",
                                     isActive
                                         ? "text-white"
                                         : "text-gray-400 group-hover:text-gray-200"
@@ -87,7 +87,7 @@ export default function MobileNavbar() {
                         </div>
                         <span
                             className={cn(
-                                "text-sm -mt-1",
+                                "text-xs sm:text-sm -mt-1",
                                 isActive
                                     ? "text-blue-400 font-bold"
                                     : "text-gray-400 group-hover:text-gray-200"

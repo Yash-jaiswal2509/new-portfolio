@@ -36,7 +36,7 @@ export default async function CompetitiveProgramming() {
   };
 
   return (
-    <div className="min-h-screen w-full p-6 md:p-10 text-white">
+    <div className="min-h-screen w-full p-2 sm:p-6 md:p-10 text-white">
       <div className="max-w-6xl mx-auto space-y-8">
         <AnimatedContainer>
           <h1 className="text-3xl font-bold mb-8 text-center">Competitive Programming Stats</h1>

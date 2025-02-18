@@ -15,7 +15,7 @@ const AnimatedContainer = ({ children }: AnimatedContainerProps) => {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="backdrop-blur-sm bg-white/5 p-6 rounded-lg border border-white/10"
+            className="backdrop-blur-sm bg-white/5 p-3 sm:p-6 rounded-lg border border-white/10"
         >
             {children}
         </motion.div>

@@ -16,11 +16,11 @@ const Home = async () => {
     new Date(b.achievedAt).getTime() - new Date(a.achievedAt).getTime()
   );
 
-  console.log(sortedAchievements);
+  // console.log(sortedAchievements);
 
   const words = [
-    { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
-    { text: "Software Engineer.", className: "text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
+    { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-sm sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
+    { text: "Software Engineer.", className: "text-sm sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
   ];
 
   return (
@@ -31,7 +31,7 @@ const Home = async () => {
       />
 
       <div className="mt-16 md:mt-32 flex items-center flex-col">
-        <p className="text-white text-sm md:text-base">A 2026 aspirant currently looking for jobs or internship</p>
+        <p className="text-gray-400 text-xs sm:text-sm md:text-base">A 2026 aspirant currently looking for jobs or internship</p>
         <TypewriterEffectSmooth words={words} />
 
         <div className="inline-flex space-x-4 mt-4">
@@ -41,7 +41,7 @@ const Home = async () => {
           </Link>
         </div>
 
-        <div className="mt-32 w-full">
+        <div className="mt-10 sm:mt-32 w-full">
           <ShootingStars
             minDelay={1000}
             maxDelay={2000}
@@ -53,11 +53,11 @@ const Home = async () => {
             starWidth={20}
           />
           <StarsBackground starDensity={0.0002} allStarsTwinkle />
-          <h2 className="text-white text-xl sm:text-2xl text-center font-semibold tracking-wider underline underline-offset-8">
+          <h2 className="text-white text-xl sm:text-2xl mb-5 text-center font-semibold tracking-wider underline underline-offset-8">
             Some recent achievements
           </h2>
-          <div className="h-full w-full relative p-10">
-            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 relative p-2">
+          <div className="h-full w-full relative p-2 sm:p-10">
+            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 relative">
               {sortedAchievements.map((achievement, index) => (
                 <AchievementCard
                   key={achievement.id}

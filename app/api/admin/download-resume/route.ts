@@ -8,7 +8,7 @@ export async function GET() {
       select: { resume: true },
     });
 
-    console.log('Resume:', result);
+    // console.log('Resume:', result);
 
     if (!result || !result.resume) {
       return NextResponse.json(
