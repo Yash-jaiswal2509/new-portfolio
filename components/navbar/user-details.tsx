@@ -1,27 +1,19 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { logout } from "@/actions/logout";
+import { useSession, signOut } from "next-auth/react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
+import { useState } from "react";
 
 const UserDetails = () => {
     const { data: session, status } = useSession();
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
-
-    useEffect(() => {
-        if (isLoggingOut && status !== "authenticated") {
-            window.location.href = "/";
-        }
-    }, [isLoggingOut, status, session]);
 
     const onLogout = async () => {
         try {
             setIsLoggingOut(true);
-            await logout();
-            setShowDropdown(false);
+            await signOut({ redirectTo: DEFAULT_LOGIN_REDIRECT });
         } catch (error) {
             console.error("Error during logout:", error);
             setIsLoggingOut(false);
