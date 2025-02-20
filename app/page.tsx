@@ -16,8 +16,6 @@ const Home = async () => {
     new Date(b.achievedAt).getTime() - new Date(a.achievedAt).getTime()
   );
 
-  // console.log(sortedAchievements);
-
   const words = [
     { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-sm sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
     { text: "Software Engineer.", className: "text-sm sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
