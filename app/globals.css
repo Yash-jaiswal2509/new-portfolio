@@ -125,7 +125,7 @@ body {
   height: 150%;
   background: radial-gradient(
     circle at center,
-    rgba(89, 139, 255, 0.1) 0%,
+    rgba(77, 131, 255, 0.15) 0%,
     transparent 70%
   );
   animation: rotate 10s linear infinite;
