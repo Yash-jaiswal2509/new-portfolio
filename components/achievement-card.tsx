@@ -28,7 +28,7 @@ const AchievementCard = ({ achievement, index }: AchievementCardProps) => {
                 ease: "easeOut"
             }}
         >
-            <Card className="glow-card bg-transparent text-white backdrop-blur shadow-lg border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1 duration-300 max-w-sm">
+            <Card className="glow-card flex flex-col justify-between h-full bg-transparent text-white backdrop-blur shadow-lg border border-white/10 hover:border-white/20 transition-all hover:-translate-y-1 duration-300 max-w-sm">
                 <CardHeader>
                     <CardTitle className="text-lg md:text-xl font-bold text-center relative">
                         {achievement.title}
