@@ -16,6 +16,8 @@ const Home = async () => {
     new Date(b.achievedAt).getTime() - new Date(a.achievedAt).getTime()
   );
 
+  const recentSixAchievements = sortedAchievements.slice(0, 6);
+
   const words = [
     { text: "Hi, I'm Yash Jaiswal, a aspiring", className: "text-sm sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-white" },
     { text: "Software Engineer.", className: "text-sm sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-blue-500" },
@@ -55,8 +57,8 @@ const Home = async () => {
             Some recent achievements
           </h2>
           <div className="h-full w-full relative p-2 sm:p-10">
-            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 relative">
-              {sortedAchievements.map((achievement, index) => (
+            <div className="h-fit w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 relative">
+              {recentSixAchievements.map((achievement, index) => (
                 <AchievementCard
                   key={achievement.id}
                   achievement={achievement}
